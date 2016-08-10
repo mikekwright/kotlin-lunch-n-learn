@@ -5,21 +5,13 @@ This repository holds the material that is used for a discussion on Kotlin and i
 
 ## Slides
 
+The slides are reachable online using gh-pages [here](mikewright.me/kotlin-lunch-n-learn).
+
 
 ## Examples
 
-
-## To Discuss
-
-Nullable types - aka
-
-if ( client != null && client.company != null) { 
-    hrRep = client.company.hrRep;
-} else {
-    hrRep = null;
-}
-
-hrRep = client?.company?.hrRep
+The examples from this section are copied from the kotlin exercises of [exercism.io](exercism.io)
+which is a fantastic tool for practicing code in many different languages.   
 
 
 ## References
