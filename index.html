@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+
+    <title>Prez</title>
+
+    <meta name="description" content="-- DESCRIPTION HERE --">
+    <meta name="author" content="mikewright">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/league.css" id="theme">
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="css/highlight/styles/zenburn.css" id="highlight-theme">
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+
+    <!-- INCLUDE CSS HERE -->
+
+  </head>
+
+  <body>
+
+    <div class="reveal">
+      <div class="slides"><section id="welcome" class="slide" data-has-notes="true">
+<h1>Kotlin</h1><h2>JVM Next Step</h2><p>Presented by Mike Wright</p><aside class="notes"><p>For this slideshow we will be covering kotlin the jvm that was created by Jetbrains, 
+the creators of the wonderful idea IntelliJ.</p></aside>
+</section>
+
+<section id="chapter-kotlin-intro" class="chapter">
+<section id="kotlin-intro-background" class="slide" data-has-notes="true">
+<h2>Kotlin History</h2><p>Kotlin is a new language created by Jetbrains. A company out of Saint Petersburg,
+Russia.    </p>
+<p>The name <code>Kotlin</code> actually comes from the name of a small island near that 
+location. </p>
+<p>Was first introduced as an upcoming language in 2011.  It was meant to compile as
+fast as java.</p><aside class="notes"><p>The created of the language was Dmitry Jemerov, and he basically said that other 
+language didn&#39;t have the features that he was looking for, other than scala. But the 
+slow compile time of scala was a big issue.</p></aside>
+</section>
+
+<section id="kotlin-intro-sample" class="slide" data-has-notes="false">
+<h2>Example</h2><h3>Hello World</h3><pre><code>    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">main</span><span class="hljs-params">(args : <span class="hljs-type">Array</span>&lt;<span class="hljs-type">String</span>&gt;)</span></span> {
+      <span class="hljs-keyword">val</span> scope = <span class="hljs-string">"world"</span>
+      println(<span class="hljs-string">"Hello, <span class="hljs-subst">$scope</span>!"</span>)
+    }
+</code></pre><h3>Elvis - ?:</h3><pre><code>    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">sayHello</span><span class="hljs-params">(maybe : <span class="hljs-type">String</span>?, neverNull : <span class="hljs-type">Int</span>)</span></span> {
+      <span class="hljs-keyword">val</span> name : String = maybe ?: <span class="hljs-string">"stranger"</span>
+      println(<span class="hljs-string">"Hello <span class="hljs-subst">$name</span>"</span>)
+    }
+</code></pre>
+</section>
+</section>
+
+<section id="exercise-1" class="slide" data-has-notes="false">
+<h1>Exercise 1</h1><h3>Lets start our first exercise, Hello World!</h3><p>For this first exercise you will basically be setting your system up in a way to
+run a simple kotlin program that will print out hello world.   </p>
+<p><strong>Note: These exercises are from <a href="exercism.io">exercism.io</a></strong></p>
+<pre><code>    exercises/<span class="hljs-number">01</span>-hello-world
+</code></pre>
+</section>
+
+<section id="chapter-basics" class="chapter">
+<section id="basics-string-templates" class="slide" data-has-notes="false">
+<h2>String Templates</h2><p>Kotlin has built-in support for string interpolation.  </p>
+<pre><code>    <span class="hljs-keyword">val</span> name = args[<span class="hljs-number">0</span>]
+    println(<span class="hljs-string">"Hello, <span class="hljs-subst">$name</span>!"</span>)
+</code></pre><p>It even has support for programmatic expressions. </p>
+<pre><code>    <span class="hljs-built_in">println</span>(<span class="hljs-string">"Hello ${args[0]}!"</span>)
+</code></pre>
+</section>
+
+<section id="basics-functions" class="slide" data-has-notes="true">
+<h2>Functions</h2><p>Defined with the <code>func</code> keyword, and the return type is placed at the end.  </p>
+<pre><code>    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">max</span><span class="hljs-params">(left: <span class="hljs-type">Int</span>, right: <span class="hljs-type">Int</span>)</span></span>: <span class="hljs-built_in">Int</span> {
+      ...
+    }
+</code></pre><p>Functions can also be defined using expression bodies much like scala </p>
+<pre><code>    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">max</span><span class="hljs-params">(left: <span class="hljs-type">Int</span>, right: <span class="hljs-type">Int</span>)</span></span> = ...
+</code></pre><aside class="notes"><p>So a general function follows the pattern of having the type at the end of the function, 
+at this seems to make it more readable and flow better. </p>
+<p>Also note that when using an expression body the <code>return</code> statement can be ommitted, 
+as well as the return type of the function itself (as this is inferred).</p></aside>
+</section>
+
+<section id="basics-classes" class="slide" data-has-notes="true">
+<h2>Classes</h2><p>Data classes (value objects) are similiar to those in Scala</p>
+<pre><code>    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">User</span></span>(<span class="hljs-keyword">val</span> name: String, <span class="hljs-keyword">var</span> age: <span class="hljs-built_in">Int</span>))
+</code></pre><p>Constructor keyword can be required</p>
+<pre><code>    <span class="hljs-keyword">class</span> Tester <span class="hljs-keyword">public</span> @Inject <span class="hljs-function"><span class="hljs-keyword">constructor</span><span class="hljs-params">(val application: <span class="hljs-keyword">String</span>)</span> <span class="hljs-comment">{
+      ...
+    }</span></span>
+</code></pre><p>Create an instance of a class as if you were calling a function.  </p>
+<pre><code>    val <span class="hljs-keyword">me</span> = User(<span class="hljs-string">"Mike"</span>, <span class="hljs-number">35</span>)
+</code></pre><aside class="notes"><p>It kotlin there is one primary constructor (that is the one defined on the class itself), 
+however you can have multiple secondary constructors.  </p>
+<p>Secondary constructors are created by using the work constructor within the body of the
+class, but must reference the primary constructor by the end.   </p>
+<pre><code>    <span class="hljs-selector-tag">class</span> <span class="hljs-selector-tag">Person</span>(val <span class="hljs-attribute">name</span>: String) {
+      <span class="hljs-selector-tag">constructor</span>(<span class="hljs-attribute">name</span>: String, <span class="hljs-attribute">parent</span>: Person) : <span class="hljs-selector-tag">this</span>(name) {
+        parent<span class="hljs-selector-class">.children</span><span class="hljs-selector-class">.add</span>(this)
+      }
+    }
+</code></pre><p>Also you might need to have an default empty arg constructor for serialization libraries 
+such as jackson.  With kotlin this can occur when you have all the arguments in the 
+primary constructor filled with defaults.  </p>
+<pre><code>    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span></span>(<span class="hljs-keyword">val</span> name: String = <span class="hljs-string">""</span>)
+</code></pre></aside>
+</section>
+
+<section id="basics-properties" class="slide" data-has-notes="true">
+<h2>Properties</h2><p>Kotlin has the ability to use properties similar to <code>C#</code></p>
+<pre><code>    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Phone</span></span>(<span class="hljs-keyword">val</span> number: String) {
+      <span class="hljs-keyword">val</span> isEmpty: <span class="hljs-built_in">Boolean</span>  
+        <span class="hljs-keyword">get</span>() = number == <span class="hljs-literal">null</span>
+
+      <span class="hljs-keyword">var</span> areaCode: String
+        <span class="hljs-keyword">get</span>() <span class="hljs-keyword">return</span> number.substring(<span class="hljs-number">0.</span><span class="hljs-number">.3</span>)
+        <span class="hljs-keyword">set</span>(value) {
+          number = <span class="hljs-string">"<span class="hljs-subst">$value</span><span class="hljs-subst">${number.substring(<span class="hljs-number">3.</span>.number.length)}</span>"</span>
+        }
+    }
+</code></pre><p>Can set scope on a per property level</p>
+<pre><code>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">var</span> age: <span class="hljs-built_in">Int</span> = <span class="hljs-number">0</span>
+
+    <span class="hljs-keyword">var</span> otherAge: <span class="hljs-built_in">Int</span> = <span class="hljs-number">0</span>
+      <span class="hljs-keyword">private</span> <span class="hljs-keyword">set</span>
+</code></pre><aside class="notes"><p>By default anything added through the constructor has a property created for it, 
+you cannot overwrite the default properties created by the constructor, so you will
+need to convert those properties to be private and then create the custom properties
+for what you are trying to do.</p></aside>
+</section>
+
+<section id="basics-companion-objects" class="slide" data-has-notes="true">
+<h2>Companion Object</h2><p>Kotlin does not have the notion of statics inside of classes, it recommends those be at a
+package level instead.  </p>
+<p>It also does provide a static-like mechanism know as a companion object, however this is 
+closer to a singleton as the companion objects are actually instantiated.  </p>
+<pre><code>    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyClass</span> </span>{
+      <span class="hljs-keyword">companion</span> <span class="hljs-keyword">object</span> Factory {
+        <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">create</span><span class="hljs-params">()</span></span>: MyClass = MyClass()
+      }
+    }
+
+    <span class="hljs-keyword">val</span> instance = MyClass.create()
+    <span class="hljs-keyword">val</span> <span class="hljs-keyword">companion</span> = MyClass.Factory
+</code></pre><aside class="notes"><p>With the companion object, you can completely ommit the name of the companion object which will
+have it default to <code>Companion</code></p>
+<pre><code>    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyClass</span> </span>{
+      <span class="hljs-keyword">companion</span> <span class="hljs-keyword">object</span> {
+      }
+    }
+
+    <span class="hljs-keyword">val</span> <span class="hljs-keyword">companion</span> = MyClass.<span class="hljs-keyword">companion</span>
+</code></pre></aside>
+</section>
+
+<section id="basics-extension-methods" class="slide" data-has-notes="false">
+<h2>Extension Methods</h2><p>Kotlin provides support for extension methods, methods that can be used on a given 
+object with the feel that they have been part of that object all along.   </p>
+<pre><code>    <span class="hljs-function"><span class="hljs-keyword">fun</span> String.<span class="hljs-title">addSignature</span><span class="hljs-params">()</span></span> = <span class="hljs-keyword">this</span> + <span class="hljs-string">" my signature"</span>
+
+    <span class="hljs-keyword">val</span> message = <span class="hljs-string">"This is my message"</span>
+    println(message.addSignature())
+</code></pre><p>You can even have extension methods that will be called for nullable types</p>
+<pre><code>    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-built_in">Int</span>?.<span class="hljs-title">toString</span><span class="hljs-params">()</span></span>: String {
+      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span> == <span class="hljs-literal">null</span>) {
+        <span class="hljs-keyword">return</span> <span class="hljs-string">"N/A"</span>
+      }
+
+      <span class="hljs-keyword">return</span> toString()
+    }
+</code></pre>
+</section>
+
+<section id="basics-lambdas" class="slide" data-has-notes="true">
+<h2>Lambdas</h2><p>Like many of the newer (and older) languages, Kotlin support lambdas</p>
+<pre><code>    <span class="hljs-keyword">val</span> sum = { x: <span class="hljs-built_in">Int</span>, y: <span class="hljs-built_in">Int</span> -&gt; x + y }
+    <span class="hljs-comment">// Typed</span>
+    <span class="hljs-keyword">val</span> sum: (<span class="hljs-built_in">Int</span>, <span class="hljs-built_in">Int</span>) -&gt; <span class="hljs-built_in">Int</span> = { x, y -&gt; x + y }
+</code></pre><p>There are also library functions that are higher order functions (meaning they take
+a function as an arg).  </p>
+<pre><code>    max(strings, { <span class="hljs-selector-tag">a</span>, <span class="hljs-selector-tag">b</span> -&gt; <span class="hljs-selector-tag">a</span><span class="hljs-selector-class">.length</span> &lt; <span class="hljs-selector-tag">b</span><span class="hljs-selector-class">.length</span> })
+
+    names<span class="hljs-selector-class">.filter</span> { name<span class="hljs-selector-class">.length</span> &lt; <span class="hljs-number">3</span> }
+</code></pre><p>There are also <code>annonymous functions</code> that are defined differently</p>
+<pre><code>    <span class="hljs-function"><span class="hljs-title">fun</span><span class="hljs-params">(x: <span class="hljs-type">Int</span>, y: <span class="hljs-type">Int</span>)</span></span>: <span class="hljs-built_in">Int</span> = x + y
+</code></pre><aside class="notes"><p>Kotlin also has added the notion of an <code>inline</code>, for those who have programmed in 
+C\C++ before the inline should be a common idea, although not often used since most
+compilers are able to optimize better then we as humans can.  </p>
+<p>However in kotlin the idea is that instead of using the dynamically generated closure
+based method it will adjust to manually inline the code.  And there is a corresponding
+noinline that you can use as well.  </p>
+<pre><code>    <span class="hljs-keyword">inline</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">foo</span><span class="hljs-params">(method: ()</span></span> -&gt; <span class="hljs-built_in">Unit</span>, <span class="hljs-keyword">noinline</span> other: () -&gt; <span class="hljs-built_in">Unit</span>) {
+      ....
+    }
+</code></pre><p>Annonymous functions will allow you to specify the return type, where lambda&#39;s don&#39;t have that.</p></aside>
+</section>
+
+<section id="basics-smart-casts" class="slide" data-has-notes="true">
+<h2>Smart Casts</h2><p>Often when using other languages you will see the below code</p>
+<pre><code>    <span class="hljs-built_in">if</span> (person.isInstance(Worker.<span class="hljs-keyword">class</span>)) {
+        Worker worker = (Worker)person ;
+        System.out.<span class="hljs-built_in">println</span>(worker.getTool());
+    }
+</code></pre><p>In kotlin it will automatically cast your type once you have used an
+expression to make sure it is that type.  </p>
+<pre><code>    <span class="hljs-keyword">if</span> (person <span class="hljs-keyword">is</span> Worker) {
+      println(person.tool)
+    }
+
+    <span class="hljs-keyword">if</span> (x <span class="hljs-keyword">is</span> <span class="hljs-built_in">String</span> &amp;&amp; x.length &gt; <span class="hljs-number">0</span>) {
+      ...
+    }
+
+    <span class="hljs-keyword">if</span> (x !<span class="hljs-keyword">is</span> <span class="hljs-built_in">String</span>) { 
+      ... 
+    } <span class="hljs-keyword">else</span> {
+      val <span class="hljs-built_in">len</span> = x.length
+    }
+</code></pre><aside class="notes"><p>This will also automatically cast in when expressions and while loops.  </p>
+<p>There is also the ability to have an unsafe cast using the <code>as</code> keyword that will throw and
+exception, or you can use the <code>as?</code> that will return null instead of throwing an exception.</p></aside>
+</section>
+
+<section id="basics-when" class="slide" data-has-notes="false">
+<h2>When</h2><p>When is a mix between a <code>switch</code> from Java and a matcher in a functional language</p>
+<pre><code>    <span class="hljs-keyword">when</span>(count) {
+      1 -&gt; <span class="hljs-selector-tag">println</span>(<span class="hljs-string">"first"</span>) 
+      <span class="hljs-selector-tag">2</span> <span class="hljs-selector-tag">-</span>&gt; <span class="hljs-selector-tag">println</span>(<span class="hljs-string">"second"</span>)
+      <span class="hljs-selector-tag">else</span> <span class="hljs-selector-tag">-</span>&gt; <span class="hljs-selector-tag">println</span>(<span class="hljs-string">"to big"</span>)
+    }
+</code></pre><p>You can also use ranges and multiple values</p>
+<pre><code>    when (count) {
+      <span class="hljs-number">1</span>,<span class="hljs-number">3</span>,<span class="hljs-number">5</span>,<span class="hljs-number">9</span> -&gt; println(<span class="hljs-string">"low odd"</span>)
+      <span class="hljs-number">2</span>,<span class="hljs-number">4</span>,<span class="hljs-number">6</span>,<span class="hljs-number">8</span> -&gt; println(<span class="hljs-string">"low even"</span>)
+      <span class="hljs-number">10.</span><span class="hljs-number">.100</span> -&gt; println(<span class="hljs-string">"under 100"</span>)
+      !<span class="hljs-number">200.</span><span class="hljs-number">.300</span> -&gt; println(<span class="hljs-string">"not between 200 and 300"</span>)
+      else -&gt; println(<span class="hljs-string">"in the 200-300 range"</span>)
+    }
+</code></pre><p>It even works with types</p>
+<pre><code>    <span class="hljs-keyword">when</span> (x) {
+      <span class="hljs-keyword">is</span> Int<span class="hljs-function"> -&gt;</span> <span class="hljs-built_in">print</span>(x + <span class="hljs-number">1</span>)
+      <span class="hljs-keyword">is</span> String<span class="hljs-function"> -&gt;</span> <span class="hljs-built_in">print</span>(x + <span class="hljs-string">"str"</span>)
+      <span class="hljs-keyword">is</span> IntArray<span class="hljs-function"> -&gt;</span> <span class="hljs-built_in">print</span>(x.sum())
+    }
+</code></pre>
+</section>
+
+<section id="basics-other-things" class="slide" data-has-notes="true">
+<h2>Other Things</h2><p>There are a lot of other things that are very interesting in the language.  </p>
+<ol>
+<li><code>breaks</code> and <code>continues</code> can target loops</li>
+<li>returns inside of a lambda can break out of outer function (not annonymous functions)</li>
+<li>Provides a set list of operators that you can overload. </li>
+<li><code>!!</code> operator for forcing NPE when need on an object instead of <code>?</code></li>
+</ol>
+<p>And of Course it tries to fix <a href="http://en.wikipedia.org/wiki/Tony_Hoare#Apologies_and_retractions">The Billion Dollar Mistake</a> 
+by make use of explicit Nullables.   </p>
+<pre><code>    val name: <span class="hljs-built_in">String</span> = <span class="hljs-string">"Mike"</span>
+    name = <span class="hljs-keyword">null</span>   <span class="hljs-comment">// Compilation error</span>
+
+    val name: <span class="hljs-built_in">String</span>? = <span class="hljs-string">"Mike"</span>
+    name = <span class="hljs-keyword">null</span>
+</code></pre><aside class="notes"><p>loop@ for (i in 1..100) {
+        for (j in 1..100) {
+          if (...)
+            break@loop
+        }
+      }</p>
+<pre><code>  <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">foo</span><span class="hljs-params">()</span></span> {
+    ints.forEach <span class="hljs-symbol">lit@</span> {
+      <span class="hljs-keyword">if</span> (it == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span><span class="hljs-symbol">@lit</span>
+      print(it)
+    }
+  }
+
+
+  <span class="hljs-comment">// Returns a null from first experssion instead of NPE</span>
+  <span class="hljs-keyword">val</span> length = str?.length ?: <span class="hljs-number">-1</span>
+  <span class="hljs-comment">// Forces an NPE to occur</span>
+  <span class="hljs-keyword">val</span> length = str!!.length
+</code></pre></aside>
+</section>
+</section>
+
+<section id="exercise-2" class="slide" data-has-notes="false">
+<h1>Exercise 2</h1><h3>The RNA Transcription</h3><p>For this simple exercise you will be using the knowledge you just had (and probably google)
+to convert a string of RNA values into their corresponding dns values.  </p>
+<pre><code>    exercies<span class="hljs-regexp">/02-rna-transcription/</span>
+</code></pre>
+</section></div>
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+      controls: true,
+      progress: true,
+      history: true,
+      center: true,
+
+      transition: Reveal.getQueryHash().transition || 'slide', // none/fade/slide/convex/concave/zoom
+
+      // Optional reveal.js plugins
+      dependencies: [
+        //{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+        //{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+        //{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+        { src: 'plugin/zoom-js/zoom.js', async: true },
+        { src: 'plugin/notes/notes.js', async: true }
+      ]
+    });
+    </script>
+
+    <!-- INCLUDE JS HERE -->
+
+  </body>
+</html>
